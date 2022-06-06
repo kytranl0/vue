@@ -6,16 +6,13 @@ export default {
       counter: {
         count: 1
       },
-      titleClass: 'title'
+      titleClass: 'title',
+      text: ''
     }
   },
   methods: {
     increment() {
       this.counter.count++
-    },
-    onInput(e) {
-      this.text = e.target.value
-      console.log(this.text)
     }
   } 
 }
@@ -27,7 +24,8 @@ export default {
   <h1 :class="titleClass"> Red </h1> 
   <button @click="increment">Count++</button>
 
-  <input :value="text" @input="onInput" />
+  <input v-model="text" />
+  <p> {{text}} </p>
 </template>
 
 <style>
