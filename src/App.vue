@@ -11,8 +11,12 @@ export default {
   },
   methods: {
     increment() {
-      this.counter.count++;
-    } 
+      this.counter.count++
+    },
+    onInput(e) {
+      this.text = e.target.value
+      console.log(this.text)
+    }
   } 
 }
 </script>
@@ -22,6 +26,8 @@ export default {
   <h1> {{counter.count}} </h1>
   <h1 :class="titleClass"> Red </h1> 
   <button @click="increment">Count++</button>
+
+  <input :value="text" @input="onInput" />
 </template>
 
 <style>
