@@ -7,12 +7,20 @@ export default {
         count: 1
       },
       titleClass: 'title',
-      text: ''
+      text: '',
+      switch: false
     }
   },
   methods: {
     increment() {
       this.counter.count++
+    }, 
+    toggle() {
+      if (this.switch) {
+        this.switch = false;
+      } else {
+        this.switch = true;
+      }
     }
   } 
 }
@@ -26,6 +34,9 @@ export default {
 
   <input v-model="text" />
   <p> {{text}} </p>
+  <button @click="toggle">Toggle</button>
+  <h1 v-if="switch">Vue</h1>
+  <h1 v-else>No</h1>
 </template>
 
 <style>
