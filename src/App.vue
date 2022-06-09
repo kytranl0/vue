@@ -1,4 +1,5 @@
 <script>
+let id = 0;
 export default {
   data() {
     return {
@@ -8,7 +9,13 @@ export default {
       },
       titleClass: 'title',
       text: '',
-      switch: false
+      switch: false,
+      todos: [
+          {id: id++, text: 'Learn HTML'},
+          {id: id++, text: 'Learn Javascript'},
+          {id: id++, text: 'Learn Vue'}
+      ],
+      newToDo = ''
     }
   },
   methods: {
@@ -20,6 +27,20 @@ export default {
         this.switch = false;
       } else {
         this.switch = true;
+      }
+    },
+    addToDo() {
+      this.todos.push({id: id++, text: 'Todo item'});
+   
+    },
+    removeToDo(e) {
+      // let t = this.todos.find(function findObj(d) {
+      //   return d.id === e.id;
+      // })
+      for (let i = 0; i<this.todos.length; i++) {
+        if (this.todos[i].id == e.id) {
+          this.todos.splice(i,i+1);
+        }
       }
     }
   } 
@@ -37,6 +58,17 @@ export default {
   <button @click="toggle">Toggle</button>
   <h1 v-if="switch">Vue</h1>
   <h1 v-else>No</h1>
+  <ul>
+  <form @submit.prevent="addToDo">
+    <input v-model="newToDo">
+    <button>Add todo</button>
+  </form>
+  <li v-for="todo in todos" :key="todo.id">
+    {{todo.text}}
+    <button @click="removeToDo(todo)">X</button>
+  </li>
+  </ul> 
+
 </template>
 
 <style>
