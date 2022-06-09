@@ -12,10 +12,11 @@ export default {
       switch: false,
       newToDo: '',
       todos: [
-        { id: id++, text: 'Learn HTML' },
-        { id: id++, text: 'Learn JavaScript' },
-        { id: id++, text: 'Learn Vue' }
-      ]
+        { id: id++, text: 'Learn HTML', done: false},
+        { id: id++, text: 'Learn JavaScript', done: false },
+        { id: id++, text: 'Learn Vue', done: false }
+      ],
+      hideCompleted: false
       
     }
   },
@@ -31,23 +32,33 @@ export default {
       }
     },
     addToDo() {
-      this.todos.push({id: id++, text: this.newToDo});
+      this.todos.push({id: id++, text: this.newToDo, done: false});
       this.newToDo = '';
     },
     removeToDo(e) {
       this.todos = this.todos.filter((t) => t!=e)
     }
-  } 
+  },
+  computed: {
+    filteredTodos() {
+      if (this.hideCompleted) {
+        return this.todos.filter((t) => !t.done )
+      } else {
+        return this.todos
+      }
+    }
+  }
 }
 </script>
 
 <template>  
-  <h1>{{message.split('').reverse().join('')}}</h1>
-  <h1> {{counter.count}} </h1>
-  <h1 :class="titleClass"> Red </h1> 
+  <h1 :class="titleClass">{{message.split('').reverse().join('')}}</h1>
   <button @click="increment">Count++</button>
+  <h1> {{counter.count}} </h1>
 
   <input v-model="text" />
+
+
   <p> {{text}} </p>
   <button @click="toggle">Toggle</button>
   <h1 v-if="switch">Vue</h1>
@@ -59,16 +70,23 @@ export default {
   </form>
 
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
-      {{todo.text}}
+    <li v-for="todo in filteredTodos" :key="todo.id">
+      <input type="checkbox" v-model="todo.done">
+      <span :class="{done: todo.done}"> {{todo.text}} </span>
       <button @click="removeToDo(todo)">X</button>
     </li>
   </ul> 
+  <button @click="hideCompleted = !hideCompleted"> 
+  {{hideCompleted ? 'Show all': 'Hide all completed'}}
+  </button>
 
 </template>
 
 <style>
 .title {
   color: red;
+}
+.done {
+  text-decoration: line-through;
 }
 </style>
