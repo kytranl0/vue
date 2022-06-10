@@ -47,7 +47,11 @@ export default {
         return this.todos
       }
     }
+  },
+  mounted() {
+      this.$refs.p.textContent = "template ref after mount";
   }
+  
 }
 </script>
 
@@ -79,6 +83,8 @@ export default {
   <button @click="hideCompleted = !hideCompleted"> 
   {{hideCompleted ? 'Show all': 'Hide all completed'}}
   </button>
+
+  <p ref="p">template ref before mount</p>
 
 </template>
 
