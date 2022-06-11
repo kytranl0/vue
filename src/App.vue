@@ -57,17 +57,20 @@ export default {
 
 <template>  
   <h1 :class="titleClass">{{message.split('').reverse().join('')}}</h1>
+  <br/>
   <button @click="increment">Count++</button>
   <h1> {{counter.count}} </h1>
-
+  <br/>
   <input v-model="text" />
-
-
   <p> {{text}} </p>
+  <br/>
+  <br/>
   <button @click="toggle">Toggle</button>
   <h1 v-if="switch">Vue</h1>
   <h1 v-else>No</h1>
 
+  <br/>
+  <br/>
   <form @submit.prevent="addToDo">
     <input v-model="newToDo">
     <button>Add todo</button>
@@ -80,6 +83,8 @@ export default {
       <button @click="removeToDo(todo)">X</button>
     </li>
   </ul> 
+    <br/>
+      <br/>
   <button @click="hideCompleted = !hideCompleted"> 
   {{hideCompleted ? 'Show all': 'Hide all completed'}}
   </button>
