@@ -3,7 +3,7 @@ let id = 0;
 export default {
   data() {
     return {
-      message: 'Hello World!',
+      message: 'Introduction To Vue.js',
       counter: {
         count: 1
       },
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <template>  
-  <h1 :class="titleClass">{{message.split('').reverse().join('')}}</h1>
+  <h1 :class="titleClass">{{message}}</h1>
   <br/>
   <button @click="increment">Count++</button>
   <h1> {{counter.count}} </h1>
