@@ -1,70 +1,75 @@
 <script>
+import ChildComp from './components/ChildComp.vue'
 let id = 0;
 export default {
-  data() {
-    return {
-      message: 'Introduction To Vue.js',
-      counter: {
-        count: 1
-      },
-      titleClass: 'title',
-      text: '',
-      switch: false,
-      newToDo: '',
-      todos: [
-        { id: id++, text: 'Learn HTML', done: false},
-        { id: id++, text: 'Learn JavaScript', done: false },
-        { id: id++, text: 'Learn Vue', done: false }
-      ],
-      hideCompleted: false,
-      todoId: 1,
-      todoData: null
-      
-    }
-  },
-  methods: {
-    increment() {
-      this.counter.count++
-    }, 
-    toggle() {
-      if (this.switch) {
-        this.switch = false;
-      } else {
-        this.switch = true;
-      }
+    data() {
+        return {
+            message: "Introduction To Vue.js",
+            counter: {
+                count: 1
+            },
+            titleClass: "title",
+            text: "",
+            switch: false,
+            newToDo: "",
+            todos: [
+                { id: id++, text: "Learn HTML", done: false },
+                { id: id++, text: "Learn JavaScript", done: false },
+                { id: id++, text: "Learn Vue", done: false }
+            ],
+            hideCompleted: false,
+            todoId: 1,
+            todoData: null
+        };
     },
-    addToDo() {
-      this.todos.push({id: id++, text: this.newToDo, done: false});
-      this.newToDo = '';
+    methods: {
+        increment() {
+            this.counter.count++;
+        },
+        toggle() {
+            if (this.switch) {
+                this.switch = false;
+            }
+            else {
+                this.switch = true;
+            }
+        },
+        addToDo() {
+            this.todos.push({ id: id++, text: this.newToDo, done: false });
+            this.newToDo = "";
+        },
+        removeToDo(e) {
+            this.todos = this.todos.filter((t) => t != e);
+        },
+        async fetchData() {
+            this.todoData = null;
+            const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${this.todoId}`);
+            this.todoData = await res.json();
+        }
     },
-    removeToDo(e) {
-      this.todos = this.todos.filter((t) => t!=e)
+    computed: {
+        filteredTodos() {
+            if (this.hideCompleted) {
+                return this.todos.filter((t) => !t.done);
+            }
+            else {
+                return this.todos;
+            }
+        }
     },
-    async fetchData() {
-      this.todoData = null
-      const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${this.todoId}`)
-      this.todoData = await res.json()
-    }
-  },
-  computed: {
-    filteredTodos() {
-      if (this.hideCompleted) {
-        return this.todos.filter((t) => !t.done )
-      } else {
-        return this.todos
-      }
-    }
-  },
-  mounted() {
-      this.$refs.p.textContent = "template ref after mount";
-      this.fetchData()
-  },
-  watch: {
-    todoId(id) {
-      this.fetchData()
-    }
-  }
-  
+    mounted() {
+        this.$refs.p.textContent = "template ref after mount";
+        this.fetchData();
+    },
+    watch: {
+        todoId(id) {
+            this.fetchData();
+        }
+    },
+    component: {
+        ChildComp
+    },
+    components: { ChildComp }
 }
 </script>
 
@@ -109,6 +114,8 @@ export default {
   <button @click="todoId++">Fetch next todo</button>
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{todoData}}</pre>
+
+  <ChildComp></ChildComp>
 </template>
 
 <style>
