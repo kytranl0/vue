@@ -16,7 +16,9 @@ export default {
         { id: id++, text: 'Learn JavaScript', done: false },
         { id: id++, text: 'Learn Vue', done: false }
       ],
-      hideCompleted: false
+      hideCompleted: false,
+      todoId: 1,
+      todoData: null
       
     }
   },
@@ -37,6 +39,11 @@ export default {
     },
     removeToDo(e) {
       this.todos = this.todos.filter((t) => t!=e)
+    },
+    async fetchData() {
+      this.todoData = null
+      const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${this.todoId}`)
+      this.todoData = await res.json()
     }
   },
   computed: {
@@ -50,6 +57,12 @@ export default {
   },
   mounted() {
       this.$refs.p.textContent = "template ref after mount";
+      this.fetchData()
+  },
+  watch: {
+    todoId(id) {
+      this.fetchData()
+    }
   }
   
 }
@@ -90,7 +103,12 @@ export default {
   </button>
 
   <p ref="p">template ref before mount</p>
-
+  <br/>
+  <br/>
+  <p>Todo id: {{todoId}}</p>
+  <button @click="todoId++">Fetch next todo</button>
+  <p v-if="!todoData">Loading...</p>
+  <pre v-else>{{todoData}}</pre>
 </template>
 
 <style>
