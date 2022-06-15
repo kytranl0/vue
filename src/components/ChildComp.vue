@@ -1,3 +1,10 @@
+<script>
+export default {
+    props: {
+        msg: String
+    }
+}
+</script>
 <template>
-    <h1>Child Component</h1>
+    <h1>{{msg || 'No props passed yet'}}</h1>
 </template>
