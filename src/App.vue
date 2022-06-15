@@ -19,7 +19,8 @@ export default {
             ],
             hideCompleted: false,
             todoId: 1,
-            todoData: null
+            todoData: null,
+            greeting: 'greeting from parent'
         };
     },
     methods: {
@@ -66,7 +67,7 @@ export default {
             this.fetchData();
         }
     },
-    component: {
+    components: {
         ChildComp
     }
 }
@@ -113,8 +114,8 @@ export default {
   <button @click="todoId++">Fetch next todo</button>
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{todoData}}</pre>
-
-  <ChildComp></ChildComp>
+  <br />
+  <ChildComp :msg="greeting"/>
 </template>
 
 <style>
