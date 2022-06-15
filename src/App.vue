@@ -68,8 +68,7 @@ export default {
     },
     component: {
         ChildComp
-    },
-    components: { ChildComp }
+    }
 }
 </script>
 
