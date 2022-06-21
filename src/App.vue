@@ -20,7 +20,8 @@ export default {
             hideCompleted: false,
             todoId: 1,
             todoData: null,
-            greeting: 'greeting from parent'
+            greeting: 'greeting from parent class',
+            childMsg: 'No child msg yet'
         };
     },
     methods: {
@@ -115,7 +116,8 @@ export default {
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{todoData}}</pre>
   <br />
-  <ChildComp :msg="greeting"/>
+  <ChildComp :msg="greeting" @response="(msg) => childMsg = msg"/>
+  <p> {{ childMsg }} </p>
 </template>
 
 <style>
