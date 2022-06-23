@@ -10,5 +10,6 @@ export default {
 }
 </script>
 <template>
-    <h1>{{msg || 'No props passed yet'}}</h1>
+  <slot>Fallback content</slot>
+  <h1>{{msg || 'No props passed yet'}}</h1>
 </template>

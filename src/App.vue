@@ -116,7 +116,7 @@ export default {
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{todoData}}</pre>
   <br />
-  <ChildComp :msg="greeting" @response="(msg) => childMsg = msg"/>
+  <ChildComp :msg="greeting" @response="(msg) => childMsg = msg">Message: {{ childMsg }}</ChildComp>
   <p> {{ childMsg }} </p>
 </template>
 
