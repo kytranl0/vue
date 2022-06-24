@@ -20,8 +20,8 @@ export default {
             hideCompleted: false,
             todoId: 1,
             todoData: null,
-            greeting: 'greeting from parent class',
-            childMsg: 'No child msg yet'
+            greeting: 'Greeting from parent class',
+            childMsg: 'No child messages yet'
         };
     },
     methods: {
