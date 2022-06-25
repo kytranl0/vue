@@ -60,7 +60,7 @@ export default {
         }
     },
     mounted() {
-        this.$refs.p.textContent = "template ref after mounted event";
+        this.$refs.p.textContent = "Template reference after mounted event";
         this.fetchData();
     },
     watch: {
