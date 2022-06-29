@@ -108,11 +108,11 @@ export default {
   {{hideCompleted ? 'Show all': 'Hide all completed'}}
   </button>
 
-  <p ref="p">template ref before mount</p>
+  <p ref="p">Template ref before mount</p>
   <br/>
   <br/>
   <p>Todo id: {{todoId}}</p>
-  <button @click="todoId++">Fetch next todo</button>
+  <button @click="todoId++">Fetch next Todo</button>
   <p v-if="!todoData">Loading...</p>
   <pre v-else>{{todoData}}</pre>
   <br />
