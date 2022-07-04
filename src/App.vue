@@ -103,7 +103,7 @@ export default {
     <br/>
       <br/>
   <button @click="hideCompleted = !hideCompleted"> 
-  {{hideCompleted ? 'Show all': 'Hide all completed'}}
+  {{hideCompleted ? 'Show all': 'Hide all'}}
   </button>
 
   <p ref="p">Template ref before mount</p>
